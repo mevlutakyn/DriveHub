@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GazlaGitsinOto</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="relative h-64 w-full bg-cover bg-center flex items-center justify-between px-8" style="background-image: url('car-background.jpg');">
+    <h1 class="text-4xl font-bold text-white">GazlaGitsinOto</h1>
+    <button id="aboutBtn" class="bg-blue-500 text-white px-4 py-2 rounded">Hakkımızda</button>
+  </header>
+</body>
+</html>
+
+    <nav class="navbar">
+      <a href="#toyota">Toyota</a>
+      <a href="#honda">Honda</a>
+      <a href="#mercedes">Mercedes</a>
+      <a href="#peugeot">Peugeot</a>
+      <a href="#volkswagen">Volkswagen</a>
+    </nav>
+  
+    <div id="aboutSection" class="hidden">
+      <h2>Hakkımızda</h2>
+      <p>
+        GazlaGitsinOto, otomobil tutkunları için güvenilir ve hızlı çözümler sunan modern bir platformdur.
+        Hayalinizdeki araca en cazip fırsatlarla ulaşmanızı sağlıyoruz.
+        Deneyimli ekibimiz, şeffaf süreçler ve geniş araç yelpazesiyle hizmetinizde.<br>
+        satın alma işlemleri için iletişim : +90 5** *** ****
+      </p>
+    </div>
+    <div class="px-4 mb-6">
+      <label for="priceFilter" class="font-semibold">Fiyat Aralığı:</label>
+      <select id="priceFilter" class="ml-2 p-2 border rounded">
+        <option value="all">Tüm Fiyatlar</option>
+        <option value="0-750000">0 - 750.000₺</option>
+        <option value="750001-1250000">750.001₺ - 1.250.000₺</option>
+        <option value="1250001-2000000">1.250.001₺ - 2.000.000₺</option>
+        <option value="2000001-9999999">2.000.001₺+</option>
+      </select>
+    </div>
+    <script>
+      function parsePrice(priceStr) {
+        return parseInt(priceStr.replace(/\D/g, ""));
+      }
+      
+      function filterCarsByPrice(cars, min, max) {
+        return cars.filter(car => {
+          const price = parsePrice(car.price);
+          return price >= min && price <= max;
+        });
+      }
+      
+      function renderCars(carList, containerId) {
+        const container = document.getElementById(containerId);
+        container.innerHTML = "";
+      
+        carList.forEach(car => {
+          const card = document.createElement("div");
+          card.className = "bg-white rounded-xl shadow-sm overflow-hidden text-center cursor-pointer transition hover:shadow-md";
+          card.innerHTML = `
+            <img src="${car.image}" alt="${car.model}" class="w-full h-48 object-cover">
+            <h3 class="text-sm font-medium py-1">${car.model}</h3>
+          `;
+      
+          card.addEventListener("click", function () {
+            openModal(car);
+          });
+      
+          container.appendChild(card);
+        });
+      }
+      
+      function applyFilters() {
+        const value = document.getElementById("priceFilter").value;
+        let min = 0, max = Infinity;
+      
+        if (value !== "all") {
+          [min, max] = value.split("-").map(Number);
+        }
+      
+        const filteredToyota = filterCarsByPrice(toyotaCars, min, max);
+        const filteredHonda = filterCarsByPrice(hondaCars, min, max);
+        const filteredMercedes = filterCarsByPrice(mercedesCars, min, max);
+        const filteredPeugeot = filterCarsByPrice(peugeotCars, min, max);
+        const filteredVolkswagen = filterCarsByPrice(volkswagenCars, min, max);
+      
+        renderCars(filteredToyota, "toyota-cars");
+        renderCars(filteredHonda, "honda-cars");
+        renderCars(filteredMercedes, "mercedes-cars");
+        renderCars(filteredPeugeot, "peugeot-cars");
+        renderCars(filteredVolkswagen, "volkswagen-cars");
+      }
+      
+      document.getElementById("priceFilter").addEventListener("change", applyFilters);
+      
+      
+      window.addEventListener("DOMContentLoaded", () => {
+        renderCars(toyotaCars, "toyota-cars");
+        renderCars(hondaCars, "honda-cars");
+        renderCars(mercedesCars, "mercedes-cars");
+        renderCars(peugeotCars, "peugeot-cars");
+        renderCars(volkswagenCars, "volkswagen-cars");
+      });
+      </script>
+      
+      
+   
+  
+    <section id="toyota" class="my-10 px-4">
+        <h2 class="text-2xl font-bold mb-6">Toyota Araçlar</h2>
+        <div id="toyota-cars" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+          
+        </div>
+      </section>
+      <script>
+        
+        
+        const toyotaCars = [
+  { brand: "Toyota", model: "Corolla", year: "2023", engine: "1.5L", fuel: "Benzin", price: "875.000₺", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAQZCKvfNz_0yKuSDZh-GzRQ0gl6fJ8J8hIg&s", km: "12.000 km", features: ["Yolculuk Bilgi Sistemi", "Panoramik Sunroof", "Yokuş Kalkış Desteği"] },
+  { brand: "Toyota", model: "Yaris", year: "2021", engine: "1.0L", fuel: "Benzin", price: "690.000₺", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqV1GLpyPhDdVaknWjS4OT3w2siqTSF0vxVA&s", km: "25.000 km", features: ["Bluetooth", "Dijital Klima", "Geri Görüş Kamerası"] },
+  { brand: "Toyota", model: "Camry", year: "2020", engine: "2.5L", fuel: "Hibrit", price: "1.200.000₺", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRf8I67obwKyISDNi46QIXAOLVo-tIpNQkl_w&s", km: "40.000 km", features: ["Apple CarPlay", "Frenleme Destek Sistemi", "Otomatik Park Sistemi"] },
+  { brand: "Toyota", model: "Auris", year: "2019", engine: "1.4L", fuel: "Dizel", price: "780.000₺", image: "https://e00-marca.uecdn.es/assets/multimedia/imagenes/2018/05/03/15253429383339.jpg", km: "60.000 km", features: ["Yokuş Kalkış Desteği", "Dijital Gösterge Paneli", "Sürüş Modu Seçici"] },
+  { brand: "Toyota", model: "RAV4", year: "2023", engine: "2.5L", fuel: "Hibrit", price: "1.650.000₺", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSL5hewDwfvlIWhUwkTs5H8CDvBU8J0rHun2g&s", km: "5.000 km", features: ["Adaptif Hız Sabitleyici", "Elektrikli Bagaj Kapağı", "Otomatik Far"] },
+  { brand: "Toyota", model: "Avensis", year: "2018", engine: "1.8L", fuel: "Benzin", price: "715.000₺", image: "https://cdn.wheel-size.com/thumbs/51/a3/51a336cf7cb4229196d50a482e20d84c.jpg", km: "90.000 km", features: ["Deri Koltuklar", "Otomatik Klima", "Keyless Go"] },
+  { brand: "Toyota", model: "CHR", year: "2022", engine: "1.8L", fuel: "Hibrit", price: "1.050.000₺", image: "https://images.hgmsites.net/lrg/2022-toyota-c-hr-nightshade-fwd-natl-angular-front-exterior-view_100828834_l.jpg", km: "15.000 km", features: ["Savaş Sistemleri", "Geri Görüş Kamerası", "Kör Nokta Uyarı Sistemi"] },
+  { brand: "Toyota", model: "Hilux", year: "2020", engine: "2.4L", fuel: "Dizel", price: "1.150.000₺", image: "https://www.log.com.tr/wp-content/uploads/2020/04/2020-toyota-hilux-1280x720.jpg", km: "80.000 km", features: ["4x4 Çekiş Sistemi", "Frenleme Destek Sistemi", "Çift Kabin"] },
+  { brand: "Toyota", model: "Supra", year: "2022", engine: "3.0L", fuel: "Benzin", price: "2.700.000₺", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8srw9mH4mGvow7YY092V3WlXeX4KR2HpdcQ&s", km: "10.000 km", features: ["Yüksek Performans Fren Sistemi", "Spor Koltuklar", "Hız Kontrol Sistemi"] },
+  { brand: "Toyota", model: "Prius", year: "2019", engine: "1.8L", fuel: "Hibrit", price: "825.000₺", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIeXr38q3cb_Q9M4CyamMm55ZEFGRTe1OzPA&s", km: "55.000 km", features: ["Otomatik Park", "Navigasyon Sistemi", "Geri Görüş Kamerası"] },
+  { brand: "Toyota", model: "Land Cruiser", year: "2020", engine: "4.0L", fuel: "Benzin", price: "2.350.000₺", image: "https://cdn.wheel-size.com/automobile/body/toyota-land-cruiser-2021-2022-1629186007.4929957.jpg", km: "100.000 km", features: ["Süper 4x4 Sistemi", "Deri Koltuklar", "Elektrikli Koltuk Ayarları"] },
+  { brand: "Toyota", model: "Verso", year: "2018", engine: "1.6L", fuel: "Dizel", price: "690.000₺", image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjegwRX6KLTIPax71d1O1PSNnJGaTmnDv3S6lGldYrRdnaK-T7haPUtkqB43zRk1F_wN1u8Kwd3Tn2dPwRDqc0HjYIassolgwJa4WNHTJYQBkObyPrvI6a-NcKwAnTSBjXHd6QXrASf/s1600/Verso+1.jpg", km: "120.000 km", features: ["Büyük Bagaj Alanı", "Hız Sabitleyici", "Park Yardım Sistemi"] },
+  { brand: "Toyota", model: "Aygo", year: "2019", engine: "1.0L", fuel: "Benzin", price: "560.000₺", image: "https://media.toyota.co.uk/wp-content/uploads/sites/5/2019/02/AYG1007a_18-1-scaled.jpg", km: "50.000 km", features: ["City Safety Sistemi", "Geri Görüş Kamerası", "Bluetooth Bağlantısı"] },
+  { brand: "Toyota", model: "C-HR", year: "2021", engine: "2.0L", fuel: "Hibrit", price: "1.180.000₺", image: "https://file.kelleybluebookimages.com/kbb/base/evox/CP/14668/2021-Toyota-C-HR-front_14668_032_2400x1800_070.png", km: "30.000 km", features: ["Adaptif Hız Sabitleyici", "Elektrikli Koltuklar", "Büyük Panaromik Cam Tavan"] },
+  { brand: "Toyota", model: "Proace", year: "2020", engine: "1.5L", fuel: "Dizel", price: "980.000₺", image: "https://scene7.toyota.eu/is/image/toyotaeurope/Toyota+Proace+%285%29:Medium-Landscape?ts=0&resMode=sharp2&op_usm=1.75,0.3,2,0", km: "85.000 km", features: ["Geniş İç Mekan", "Kapsamlı Güvenlik Sistemi", "Otomatik Klima"] },
+  { brand: "Toyota", model: "Urban Cruiser", year: "2021", engine: "1.5L", fuel: "Benzin", price: "860.000₺", image: "https://cdn.wheel-size.com/automobile/body/toyota-urban-cruiser-2023-2025-1712649672.2750103.jpg", km: "40.000 km", features: ["Dijital Gösterge Paneli", "Bluetooth", "Çift Bölge Klima"] },
+  { brand: "Toyota", model: "Highlander", year: "2022", engine: "2.5L", fuel: "Hibrit", price: "1.950.000₺", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSubyfD3LtR-8oWkS2MWCvL6W-MOygZRJYBbw&s", km: "10.000 km", features: ["Sürüş Modu Seçici", "Elektrikli Bagaj Kapağı", "Geri Görüş Kamerası"] },
+  { brand: "Toyota", model: "IQ", year: "2017", engine: "1.0L", fuel: "Benzin", price: "480.000₺", image: "https://3dimg2.felgenoutlet.de/auto-alufelgen-3d-vorschau/6046_5676/kba_basket/toyota-iq-compact-iq-aj1-2008-2014.jpg", km: "65.000 km", features: ["Kompakt Boyutlar", "Bluetooth", "Multimedya Ekranı"] },
+  { brand: "Toyota", model: "Matrix", year: "2016", engine: "1.8L", fuel: "Benzin", price: "510.000₺", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3xlC-ucAlj2pR17Sy9qMYe-3JGxMF7Gxgiw&s", km: "120.000 km", features: ["Yol Yardım Sistemi", "Elektrikli Camlar", "Anahtarsız Giriş"] },
+  { brand: "Toyota", model: "Venza", year: "2023", engine: "2.5L", fuel: "Hibrit", price: "1.680.000₺", image: "https://s3.amazonaws.com/cka-dash/209-1122-WTS230/model2.png", km: "8.000 km", features: ["Panoramik Sunroof", "Yokuş Kalkış Desteği", "Gelişmiş Güvenlik Özellikleri"] }
+];
+
+      
+        const toyotaContainer = document.getElementById("toyota-cars");
+      
+        toyotaCars.forEach(car => {
+          const card = document.createElement("div");
+          card.className = "bg-white rounded-xl shadow-sm overflow-hidden text-center";
+      
+          card.innerHTML = `
+         <img src="${car.image}" alt="${car.model}" class="w-full h-48 object-cover">
+            <h3 class="text-sm font-medium py-1">${car.model}</h3>
+          
+          `;
+          card.addEventListener("click", () => openModal(car));
+          toyotaContainer.appendChild(card);
+        });
+      </script>
+      
+  
+      <section id="honda" class="my-10 px-4">
+        <h2 class="text-2xl font-bold mb-6">Honda Araçlar</h2>
+        <div id="honda-cars" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+         
+        </div>
+      </section>
+      
+      <script>
+    const hondaCars = [
+  { 
+    brand: "Honda", model: "Civic", year: "2022", engine: "1.6L", fuel: "Dizel", price: "950.000₺", 
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8Bxv8o0ffkqag6OanGKaNEsQaMF5-eGqZrA&s",
+    mileage: "25.000 km", features: ["Bluetooth", "Hız Sabitleyici", "Otomatik Park", "LED Farlar"]
+  },
+  { 
+    brand: "Honda", model: "Accord", year: "2021", engine: "1.5L", fuel: "Benzin", price: "1.100.000₺", 
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1PpCdLCOemmRenUO9aznCHhrwX6QA3BR_Sg&s",
+    mileage: "30.000 km", features: ["Panoramik Sunroof", "Isıtmalı Koltuklar", "Adaptif Hız Sabitleyici", "Kablosuz Şarj"]
+  },
+  { 
+    brand: "Honda", model: "Jazz", year: "2020", engine: "1.3L", fuel: "Benzin", price: "720.000₺", 
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkmxxqtL1Y0RLkeLS0xzucoua1IeN_Qx7Biw&s",
+    mileage: "15.000 km", features: ["Anahtarsız Giriş", "Arka Kamera", "Android Auto", "Apple CarPlay"]
+  },
+  { 
+    brand: "Honda", model: "CR-V", year: "2023", engine: "2.0L", fuel: "Hibrit", price: "1.550.000₺", 
+    image: "https://www.shutterstock.com/image-vector/suv-mpv-realistic-family-red-260nw-2381275295.jpg",
+    mileage: "5.000 km", features: ["Navigasyon Sistemi", "Panoramik Sunroof", "Adaptif Farlar", "Derili Koltuklar"]
+  },
+  { 
+    brand: "Honda", model: "HR-V", year: "2022", engine: "1.5L", fuel: "Benzin", price: "1.200.000₺", 
+    image: "https://cdn.wheel-size.com/thumbs/2e/80/2e809b5b76cf47b510aa2cd1dcea0c02.jpg",
+    mileage: "12.000 km", features: ["Uzaktan Başlatma", "Isıtmalı Aynalar", "Şerit Takip Sistemi", "Park Sensörleri"]
+  },
+  { 
+    brand: "Honda", model: "Insight", year: "2020", engine: "1.5L", fuel: "Hibrit", price: "1.050.000₺", 
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQRtrMVO6PH7iR2s1hr5kapH3JHGJe-Tqntg&s",
+    mileage: "20.000 km", features: ["Bluetooth Bağlantısı", "Otomatik Klima", "Çarpışma Öncesi Uyarı", "LED Sis Farları"]
+  },
+  { 
+    brand: "Honda", model: "Fit", year: "2019", engine: "1.3L", fuel: "Benzin", price: "690.000₺", 
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVNf2jD6mqDoQxVal1wrNaV7_Jn42DV7hxMA&s",
+    mileage: "40.000 km", features: ["Start-Stop Butonu", "Arka Cam Defroster", "Direksiyon Üzerinden Kontroller", "Elektrikli Aynalar"]
+  },
+  { 
+    brand: "Honda", model: "City", year: "2021", engine: "1.5L", fuel: "Benzin", price: "870.000₺", 
+    image: "https://png.pngtree.com/thumb_back/fw800/background/20220314/pngtree-side-picture-of-white-car-image_1055056.jpg",
+    mileage: "18.000 km", features: ["Otomatik Farlar", "Elektrikli Camlar", "Arka Spoiler", "Hız Sabitleyici"]
+  },
+  { 
+    brand: "Honda", model: "Pilot", year: "2022", engine: "3.5L", fuel: "Benzin", price: "1.800.000₺", 
+    image: "https://media.ed.edmunds-media.com/honda/pilot/2021/oem/2021_honda_pilot_4dr-suv_se_fq_oem_2_300.jpg",
+    mileage: "10.000 km", features: ["Dört Çeker", "Çekme Kancası", "Elektrikli Bagaj Kapağı", "Üçüncü Sıra Koltuklar"]
+  },
+  { 
+    brand: "Honda", model: "Odyssey", year: "2021", engine: "3.5L", fuel: "Benzin", price: "1.650.000₺", 
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTy_B4cd1xCs1SkLMS4-Ghu0dZ0RBNpOZMRIw&s",
+    mileage: "8.000 km", features: ["Arka Ekran Sistemi", "Çift Elektrikli Sürgülü Kapı", "Apple CarPlay", "Otomatik Bagaj"]
+  },
+  { 
+    brand: "Honda", model: "Ridgeline", year: "2020", engine: "3.5L", fuel: "Benzin", price: "1.580.000₺", 
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcJWg8gLtfh1I2t1JzYOe6uEGhlQqSLLLrKw&s",
+    mileage: "30.000 km", features: ["Dört Çeker", "Bluetooth Bağlantısı", "Dokunmatik Ekran", "Arka Görüş Kamerası"]
+  },
+  { 
+    brand: "Honda", model: "Element", year: "2011", engine: "2.4L", fuel: "Benzin", price: "450.000₺", 
+    image: "https://cars.usnews.com/static/images/Auto/izmo/330568/2011_honda_element_angularfront.jpg",
+    mileage: "100.000 km", features: ["Spor Tasarım", "Tavan Rayları", "Geniş Bagaj Alanı", "Suya Dayanıklı İç Mekan"]
+  },
+  { 
+    brand: "Honda", model: "Prelude", year: "2001", engine: "2.2L", fuel: "Benzin", price: "400.000₺", 
+    image: "https://cdn.motor1.com/images/mgl/E63lPN/s1/honda-prelude-concept-in-red.webp",
+    mileage: "150.000 km", features: ["Spor Koltuklar", "Sunroof", "Manuel Şanzıman", "Premium Ses Sistemi"]
+  }
+];
+
+      
+        const hondaContainer = document.getElementById("honda-cars");
+      
+        hondaCars.forEach(car => {
+          const card = document.createElement("div");
+          card.className = "bg-white rounded-xl shadow-sm overflow-hidden text-center";
+      
+          card.innerHTML = `
+            <img src="${car.image}" alt="${car.model}" class="w-full h-48 object-cover">
+            <h3 class="text-sm font-medium py-1">${car.model}</h3>
+            
+          `;
+          card.addEventListener("click", () => openModal(car));
+          hondaContainer.appendChild(card);
+        });
+      </script>
+      
+  
+    <section id="mercedes" class="my-10 px-4">
+        <h2 class="text-2xl font-bold mb-6">Mercedes Araçlar</h2>
+        <div id="mercedes-cars" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+         
+        </div>
+      </section>
+      <!-- Modal -->
+<div id="car-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+    <div class="bg-white rounded-xl shadow-lg max-w-md w-full p-4 relative">
+      <button id="close-modal" class="absolute top-2 right-2 text-gray-500 hover:text-black">&times;</button>
+      <img id="modal-image" src="" alt="" class="w-full h-64 object-cover rounded-lg mb-4">
+      <h3 id="modal-model" class="text-xl font-bold mb-2"></h3>
+      <p id="modal-year" class="text-gray-600"></p>
+      <p id="modal-engine" class="text-gray-600"></p>
+      <p id="modal-fuel" class="text-gray-600"></p>
+      <p id="modal-price" class="text-gray-800 font-semibold mt-2"></p>
+      <p id="modal-km"></p> 
+      <p id="modal-features"></p> 
+      <div class="mt-4 text-center">
+        <a id="buy-button" 
+        class="mt-4 inline-block bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">
+        Satın Al
+     </a>
+     
+        </a>
+      </div>
+    </div>
+  </div>
+  
+      
+      <script>
+        function openModal(car) {
+  document.getElementById("modal-image").src = car.image;
+  document.getElementById("modal-image").alt = car.model;
+  document.getElementById("modal-model").textContent = car.model;
+  document.getElementById("modal-year").textContent = "Yıl: " + car.year;
+  document.getElementById("modal-engine").textContent = "Motor: " + car.engine;
+  document.getElementById("modal-fuel").textContent = "Yakıt: " + car.fuel;
+  document.getElementById("modal-price").textContent = "Fiyat: " + car.price;
+  if (car.km) {
+    document.getElementById("modal-km").textContent = "Kilometre: " + car.km;
+  } else {
+    document.getElementById("modal-km").textContent = "Kilometre bilgisi mevcut değil";
+  }
+  document.getElementById("modal-features").textContent = "Özellikler: " + car.features.join(", "); 
+  document.getElementById("car-modal").classList.remove("hidden");
+  document.getElementById("car-modal").style.display = "flex";
+  document.getElementById("buy-now").onclick = function () {
+  window.location.href = "satinal.html";
+};
+
+
+}
+document.getElementById("close-modal").addEventListener("click", function () {
+  document.getElementById("car-modal").classList.add("hidden");
+});
+
+const mercedesCars = [
+  { 
+    brand: "Mercedes", model: "C-Class", year: "2021", engine: "2.0L", fuel: "Benzin", price: "2.100.000 TL", 
+    image: "https://mystrongad.com/BLR_BerglundLuxuryRoanoke/C-Class/2022/22%20C-Class/2022-Mercedes-Benz-C-Class-White.png", 
+    km: "15.000 km", features: ["Otomatik Park", "Adaptif Hız Sabitleyici", "Hız Limitleyici", "Panoramik Sunroof"]
+  },
+  { 
+    brand: "Mercedes", model: "E-Class", year: "2020", engine: "2.0L", fuel: "Dizel", price: "2.350.000 TL", 
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqj5qqzkphjVcHgkoWRlYES5RwLw8Y6N6omg&s", 
+    km: "25.000 km", features: ["Aktif Frenleme Sistemi", "Harman Kardon Ses Sistemi", "Elektrikli Koltuklar", "Adaptif Farlar"]
+  },
+  { 
+    brand: "Mercedes", model: "A-Class", year: "2023", engine: "1.3L", fuel: "Benzin", price: "1.550.000 TL", 
+    image: "https://pladmin.mercedes-benz.com.tr/cdn/images/hb_a-200-fl-amg_960x380_170325.png", 
+    km: "5.000 km", features: ["Otomatik Klima", "Dijital Gösterge Paneli", "Apple CarPlay", "Adaptif Hız Sabitleyici"]
+  },
+  { 
+    brand: "Mercedes", model: "A Serisi", year: "2022", engine: "1.3L", fuel: "Benzin", price: "1.450.000 TL", 
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPCDpW6GmrahPuadHNKQ3Qkz45PMobPHJl2Q&s", 
+    km: "10.000 km", features: ["Otomatik Park", "Isıtmalı Koltuklar", "Bluetooth Bağlantısı", "Sürüş Modu Seçimi"]
+  },
+  { 
+    brand: "Mercedes", model: "B Serisi", year: "2021", engine: "1.5L", fuel: "Dizel", price: "1.600.000 TL", 
+    image: "https://www.mercedes-benz.com.tr/content/dam/hq/passengercars/cars/B-Class/b-class-sports-tourer-w247-pi/modeloverview/09-2022/images/mercedes-benz-b-class-w247-modeloverview-696x392-09-2022.png", 
+    km: "18.000 km", features: ["Çift Elektrikli Sürgülü Kapı", "Panoramik Sunroof", "Navigasyon Sistemi", "Isıtmalı Yan Aynalar"]
+  },
+  { 
+    brand: "Mercedes", model: "C Serisi", year: "2022", engine: "1.6L", fuel: "Benzin", price: "2.250.000 TL", 
+    image: "https://www.mercedes-benz.com.tr/content/dam/hq/passengercars/cars/c-class/c-class-saloon-w206-pi/modeloverview/06-2022/images/mercedes-amg-c-class-w206-modeloverview-696x392-06-2022.png", 
+    km: "12.000 km", features: ["Harman Kardon Ses Sistemi", "Elektrikli Koltuk Ayarları", "Aktif Şerit Takip", "Dijital Gösterge Paneli"]
+  },
+  { 
+    brand: "Mercedes", model: "E Serisi", year: "2020", engine: "2.0L", fuel: "Dizel", price: "2.400.000 TL", 
+    image: "https://www.sifiraracal.com/resim/renk/406/mercedes-e-serisi-coupe-siyah.jpg", 
+    km: "20.000 km", features: ["Yol Yardım Sistemi", "Panoramik Sunroof", "Adaptive Cruise Control", "Geri Görüş Kamerası"]
+  },
+  { 
+    brand: "Mercedes", model: "S Serisi", year: "2019", engine: "3.0L", fuel: "Benzin", price: "4.900.000 TL", 
+    image: "https://cdn.wheel-size.com/automobile/body/mercedes-s-class-coupe-amg-2018-2021-1684561884.1923542.jpg", 
+    km: "40.000 km", features: ["Otomatik Kapaklı Bagaj", "Isıtmalı Koltuklar", "Adaptif Farlar", "360 Derece Kameralı Park Sistemi"]
+  },
+  { 
+    brand: "Mercedes", model: "EQC", year: "2021", engine: "Elektrik", fuel: "Elektrik", price: "3.600.000 TL", 
+    image: "https://www.mercedes-benz.com.tr/passengercars/owners-manuals/tr-tr/vehicles/mercedes-eq-eqc-suv-320.png", 
+    km: "7.000 km", features: ["Elektrikli Araç Takip Sistemi", "Navigasyon Sistemi", "Otomatik Park Sistemi", "Panoramik Cam Tavan"]
+  },
+  { 
+    brand: "Mercedes", model: "EQA", year: "2022", engine: "Elektrik", fuel: "Elektrik", price: "2.950.000 TL", 
+    image: "https://www.mercedes-benz.com.tr/content/dam/hq/passengercars/cars/eqa/eqa-saloon-h243-fl-pi/modeloverview/08-2023/images/mercedes-benz-eqa-h243-modeloverview-692x392-08-2023.png", 
+    km: "4.000 km", features: ["Apple CarPlay", "Otomatik Bagaj Kapağı", "Otomatik Klima", "Geri Görüş Kamerası"]
+  },
+  { 
+    brand: "Mercedes", model: "EQB", year: "2023", engine: "Elektrik", fuel: "Elektrik", price: "3.200.000 TL", 
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK5w6qDYMy3hrGj8djeCMi1kMli2B0yYwt7Q&s", 
+    km: "3.000 km", features: ["Sürüş Modu Seçimi", "Harman Kardon Ses Sistemi", "Panoramik Sunroof", "Isıtmalı Koltuklar"]
+  },
+  { 
+    brand: "Mercedes", model: "Maybach S", year: "2021", engine: "4.0L", fuel: "Benzin", price: "9.800.000 TL", 
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTUBurb5PtLywuIb0t5oy8DwsgBQYtVDq-uQ&s", 
+    km: "2.000 km", features: ["Masajlı Koltuklar", "Panoramik Sunroof", "Adaptif Hız Sabitleyici", "Bose Ses Sistemi"]
+  },
+  { 
+    brand: "Mercedes", model: "AMG GT", year: "2020", engine: "4.0L", fuel: "Benzin", price: "7.500.000 TL", 
+    image: "https://www.mercedes-benz.com.tr/content/dam/hq/passengercars/cars/amg-gt/amg-gt-2-doors-coupe-c192/modeloverview/06-2023/images/mercedes-amg-gt-c192-pad-modeloveroview-696x392-06-2023.png", 
+    km: "15.000 km", features: ["AMG Performans Koltukları", "Adaptif Farlar", "Spor Direksiyon", "Otomatik Klima"]
+  },
+  { 
+    brand: "Mercedes", model: "GLB", year: "2022", engine: "1.3L", fuel: "Benzin", price: "1.950.000 TL", 
+    image: "https://www.mercedes-benz.com.tr/content/dam/hq/passengercars/cars/glb/glb-suv-x247-fl-pi/modeloverview/03-2023/images/mercedes-benz-glb-x247-modeloverview-696x392-03-2023.png", 
+    km: "12.000 km", features: ["Çift Bölge Klima", "Otomatik Park Sistemi", "Navigasyon Sistemi", "Dijital Gösterge Paneli"]
+  },
+  { 
+    brand: "Mercedes", model: "Vito", year: "2018", engine: "2.2L", fuel: "Dizel", price: "1.700.000 TL", 
+    image: "https://st3.depositphotos.com/1358992/13880/i/450/depositphotos_138802062-stock-photo-black-van-side-view-isolated.jpg", 
+    km: "50.000 km", features: ["Yüksek Tavan", "Otomatik Klima", "Navigasyon Sistemi", "Elektrikli Sürgülü Kapı"]
+},
+{
+brand: "Mercedes", model: "Sprinter", year: "2020", engine: "2.1L", fuel: "Dizel", price: "2.300.000 TL",
+image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVOyMkUMVdUXSzDhHdVlYjV2So5tsK2JmRfA&s",
+km: "30.000 km", features: ["Elektrikli Sürgülü Kapı", "Yol Yardım Sistemi", "Çift Elektrikli Sürgülü Kapı", "Navigasyon"]
+},
+{
+brand: "Mercedes", model: "X Serisi", year: "2019", engine: "2.3L", fuel: "Dizel", price: "2.000.000 TL",
+image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-ccL1bdDCzjwaD5TYn9MLahWjsQxHmZD82g&s",
+km: "35.000 km", features: ["Elektrikli Koltuk Ayarları", "Adaptif Hız Sabitleyici", "360 Derece Kameralı Park Sistemi", "Otomatik Klima"]
+},
+{
+brand: "Mercedes", model: "GLS", year: "2021", engine: "3.0L", fuel: "Benzin", price: "4.500.000 TL",
+image: "https://cars.usnews.com/static/images/Auto/izmo/i159614268/2021_mercedes_benz_gls_angularfront.jpg",
+km: "8.000 km", features: ["Panoramik Sunroof", "Otomatik Bagaj Kapağı", "Adaptif Hız Sabitleyici", "Isıtmalı Koltuklar"]
+},
+{
+brand: "Mercedes", model: "ML", year: "2015", engine: "3.0L", fuel: "Dizel", price: "1.200.000 TL",
+image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGZxDVGNVNx_X0eV03UtUFN1fz5vO3JGuYKQ&s",
+km: "100.000 km", features: ["Yol Yardım Sistemi", "Isıtmalı Koltuklar", "Elektrikli Sürgülü Kapı", "Navigasyon"]
+},
+{
+brand: "Mercedes", model: "CLK", year: "2008", engine: "3.0L", fuel: "Benzin", price: "950.000 TL",
+image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXkf_jhAhcSFfFKfpncE4hblLmBHaE0kjDRQ&s",
+km: "150.000 km", features: ["Bluetooth", "Isıtmalı Koltuklar", "Elektrikli Yan Aynalar", "Elektrikli Koltuk Ayarları"]
+}
+];
+
+      
+        const container = document.getElementById("mercedes-cars");
+      
+        mercedesCars.forEach(car => {
+          const card = document.createElement("div");
+          card.className = "bg-white rounded-xl shadow-sm overflow-hidden text-center";
+      
+          card.innerHTML = `
+<img src="${car.image}" alt="${car.model}" class="w-full h-48 object-cover">
+            <h3 class="text-sm font-medium py-2">${car.model}</h3>
+          `;
+          card.addEventListener("click", () => openModal(car));
+          container.appendChild(card);
+        });
+      </script>
+    <section id="peugeot" class="my-10 px-4">
+        <h2 class="text-2xl font-bold mb-6">Peugeot Araçlar</h2>
+        <div id="peugeot-cars" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+         
+        </div>
+      </section>
+      
+      <script>
+    const peugeotCars = [
+  { 
+    brand: "Peugeot", model: "208", year: "2021", engine: "1.2L", fuel: "Benzin", price: "520.000 TL", 
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvRFn88ee61JuV4FeTTHC1lHPbuw5NlZSrGQ&s", 
+    km: "10.000 km", features: ["Otomatik Klima", "Bluetooth", "Yokuş Kalkış Desteği", "Arka Park Sensörleri"]
+  },
+  { 
+    brand: "Peugeot", model: "2008", year: "2022", engine: "1.2L", fuel: "Benzin", price: "640.000 TL", 
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAYYd-RaBRwQ4qp8cbf6jBANQQMXsvvdxQHQ&s", 
+    km: "15.000 km", features: ["Panoramik Sunroof", "Apple CarPlay", "Sürüş Modu Seçimi", "Adaptif Hız Sabitleyici"]
+  },
+  { 
+    brand: "Peugeot", model: "308", year: "2022", engine: "1.5L", fuel: "Dizel", price: "720.000 TL", 
+    image: "https://www.peugeot.com.tr/content/dam/peugeot/turkey/b2c/our-range/baseball/2024/new-308-baseball.png", 
+    km: "12.000 km", features: ["360 Derece Kamera", "Otomatik Park Sistemi", "Yol Yardım Asistanı", "Adaptif Farlar"]
+  },
+  { 
+    brand: "Peugeot", model: "3008", year: "2021", engine: "1.6L", fuel: "Benzin", price: "830.000 TL", 
+    image: "https://www.peugeot.com.tr/content/dam/peugeot/turkey/b2c/our-range/yeni-e-3008/3008/okenit_beyaz.png", 
+    km: "20.000 km", features: ["Apple CarPlay", "Adaptif Hız Sabitleyici", "Otomatik Park Sistemi", "Panoramik Sunroof"]
+  },
+  { 
+    brand: "Peugeot", model: "5008", year: "2021", engine: "1.5L", fuel: "Dizel", price: "950.000 TL", 
+    image: "https://www.peugeot.com.tr/content/dam/peugeot/turkey/b2c/our-range/yeni-5008/modeller/Yeni_E-5008_mavi_1024x624.png?imwidth=768", 
+    km: "25.000 km", features: ["3. Sıra Koltuklar", "Otomatik Park", "Adaptif Hız Sabitleyici", "Otomatik Klima"]
+  },
+  { 
+    brand: "Peugeot", model: "508", year: "2020", engine: "1.6L", fuel: "Benzin", price: "780.000 TL", 
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzMqqfAjGKUaX-7B0i5IsIAr77rpHwvQ9OwQ&s", 
+    km: "30.000 km", features: ["Adaptif Hız Sabitleyici", "Apple CarPlay", "Otomatik Klima", "Elektrikli Koltuklar"]
+  },
+  { 
+    brand: "Peugeot", model: "Rifter", year: "2021", engine: "1.5L", fuel: "Dizel", price: "710.000 TL", 
+    image: "https://www.peugeot.com.tr/content/dam/peugeot/turkey/b2c/our-range/yeni-e-rifter/yeni-rifter/Rifter_Allure_Trim_M.jpg?imwidth=768", 
+    km: "8.000 km", features: ["Çift Elektrikli Sürgülü Kapı", "Isıtmalı Koltuklar", "Apple CarPlay", "Bluetooth"]
+  },
+  { 
+    brand: "Peugeot", model: "Traveller", year: "2020", engine: "2.0L", fuel: "Dizel", price: "1.050.000 TL", 
+    image: "https://www.peugeot.com.tr/content/dam/peugeot/turkey/b2c/our-range/baseball/2024/815x455_yeni_traveller.png", 
+    km: "40.000 km", features: ["Çift Elektrikli Sürgülü Kapı", "Otomatik Klima", "Yol Yardım Sistemi", "Navigasyon"]
+  },
+  { 
+    brand: "Peugeot", model: "Partner", year: "2019", engine: "1.5L", fuel: "Dizel", price: "450.000 TL", 
+    image: "https://www.peugeot.com.tr/content/dam/peugeot/turkey/b2c/our-range/baseball/2024/815x455_yeni_partner_van.png", 
+    km: "60.000 km", features: ["Yüksek Tavan", "Bluetooth", "Yol Yardım Sistemi", "Navigasyon"]
+  },
+  { 
+    brand: "Peugeot", model: "e-208", year: "2022", engine: "Elektrik", fuel: "Elektrik", price: "670.000 TL", 
+    image: "https://www.peugeot.com.tr/content/dam/peugeot/turkey/b2c/our-range/baseball/2024/Yeni208_810_455.png", 
+    km: "5.000 km", features: ["Apple CarPlay", "Otomatik Park Sistemi", "Dijital Gösterge Paneli", "Isıtmalı Koltuklar"]
+  },
+  { 
+    brand: "Peugeot", model: "e-2008", year: "2022", engine: "Elektrik", fuel: "Elektrik", price: "770.000 TL", 
+    image: "https://www.peugeot.com.tr/content/dam/peugeot/turkey/b2c/our-range/baseball/2024/yeni-3008/yeni3008_810x455.png", 
+    km: "3.000 km", features: ["Dijital Gösterge Paneli", "Apple CarPlay", "Otomatik Park", "Yol Yardım Sistemi"]
+  },
+  { 
+    brand: "Peugeot", model: "406", year: "2004", engine: "2.0L", fuel: "Benzin", price: "150.000 TL", 
+    image: "https://cdn.japanesecartrade.com/jct/vehicle_image/1_16067433745fc4f54edd291.jpg", 
+    km: "150.000 km", features: ["Elektrikli Koltuk Ayarları", "Bluetooth", "Isıtmalı Koltuklar", "Otomatik Klima"]
+  },
+  { 
+    brand: "Peugeot", model: "207", year: "2009", engine: "1.4L", fuel: "Benzin", price: "230.000 TL", 
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZngLyvzH_3qdhHcouEWRdMdoAaW8uz4nWaw&s", 
+    km: "200.000 km", features: ["Bluetooth", "Yokuş Kalkış Desteği", "Isıtmalı Koltuklar", "Arka Park Sensörleri"]
+  },
+  { 
+    brand: "Peugeot", model: "307", year: "2007", engine: "1.6L", fuel: "Benzin", price: "210.000 TL", 
+    image: "https://w7.pngwing.com/pngs/22/102/png-transparent-peugeot-207-car-peugeot-206-peugeot-307-peugeot-compact-car-sedan-subcompact-car-thumbnail.png", 
+    km: "180.000 km", features: ["Bluetooth", "Otomatik Klima", "Arka Park Sensörleri", "Elektrikli Koltuklar"]
+  },
+  { 
+    brand: "Peugeot", model: "407", year: "2006", engine: "2.0L", fuel: "Dizel", price: "190.000 TL", 
+    image: "https://images.hepsiburada.net/description-assets/description-prod-30/4a33319c-8314-42cb-9ab1-7c86f25d97c2.jpg", 
+    km: "220.000 km", features: ["Navigasyon", "Bluetooth", "Isıtmalı Koltuklar", "Otomatik Klima"]
+  },
+  { 
+    brand: "Peugeot", model: "607", year: "2007", engine: "2.2L", fuel: "Dizel", price: "270.000 TL", 
+    image: "https://www.peugeotyedekparca.net/images/Peugeot508.jpg", 
+    km: "210.000 km", features: ["Elektrikli Koltuk Ayarları", "Bluetooth", "Navigasyon", "Otomatik Park"]
+  },
+  { 
+    brand: "Peugeot", model: "RCZ", year: "2015", engine: "1.6L", fuel: "Benzin", price: "430.000 TL", 
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTI9madBcwzyadNU1Z8Vx7lGJM-tfvR3k0vQ&s", 
+    km: "80.000 km", features: ["Otomatik Klima", "Bluetooth", "Spor Koltuklar", "Dijital Gösterge Paneli"]
+  }
+];
+
+      
+        const peugeotContainer = document.getElementById("peugeot-cars");
+      
+        peugeotCars.forEach(car => {
+  const card = document.createElement("div");
+  card.className = "bg-white rounded-xl shadow-sm overflow-hidden text-center cursor-pointer";
+  card.onclick = () => openModal(car); 
+
+  card.innerHTML = `
+    <img src="${car.image}" alt="${car.model}" class="w-full h-48 object-cover">
+    <h3 class="text-sm font-medium py-1">${car.model}</h3>
+  
+  `;
+  card.addEventListener("click", () => openModal(car));
+  peugeotContainer.appendChild(card);
+});
+
+      </script>
+      
+      
+      <section id="volkswagen" class="my-10 px-4">
+        <h2 class="text-2xl font-bold mb-6">Volkswagen Araçlar</h2>
+        <div id="volkswagen-cars" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+          
+        </div>
+      </section>
+      
+      <script>
+        
+        const volkswagenCars = [
+  { brand: "Volkswagen", model: "Golf", year: "2022", engine: "1.5L", fuel: "Benzin", price: "690.000 TL", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZBlolPHMXSddfSLakCxWF_TUTCqk453R9Pg&s", km: "25.000 km", features: ["Apple CarPlay", "Anahtarsız giriş", "LED farlar"] },
+  { brand: "Volkswagen", model: "Passat", year: "2020", engine: "1.6L", fuel: "Dizel", price: "780.000 TL", image: "https://w7.pngwing.com/pngs/718/356/png-transparent-volkswagen-passat-gte-hybrid-car-volkswagen-golf-gte-volkswagen-compact-car-sedan-headlamp.png", km: "40.000 km", features: ["Adaptif hız sabitleyici", "Park sensörleri", "Dokunmatik ekranlı bilgi-eğlence sistemi"] },
+  { brand: "Volkswagen", model: "Tiguan", year: "2021", engine: "2.0L", fuel: "Dizel", price: "850.000 TL", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVRiGFVur0lwFiUX5XoGQ68doR7bIBVA0M3A&s", km: "30.000 km", features: ["Panoramik sunroof", "Dört tekerlekten çekiş", "Isıtmalı koltuklar"] },
+  { brand: "Volkswagen", model: "T-Roc", year: "2022", engine: "1.5L", fuel: "Benzin", price: "770.000 TL", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTUZZadZIPU6yPmCY4U5PnzYlvQX55Gd1_Pw&s", km: "20.000 km", features: ["Kablosuz şarj", "Bluetooth bağlantısı", "Spor modu"] },
+  { brand: "Volkswagen", model: "Touareg", year: "2021", engine: "3.0L", fuel: "Dizel", price: "1.200.000 TL", image: "https://netrinoimages.s3.eu-west-2.amazonaws.com/2017/08/13/463730/463020/volkswagen_touareg_rline_2019_3d_model_c4d_max_obj_fbx_ma_lwo_3ds_3dm_stl_4749121_m.jpg", km: "15.000 km", features: ["4WD", "Hava süspansiyonu", "Adaptif hız sabitleyici"] },
+  { brand: "Volkswagen", model: "Polo", year: "2021", engine: "1.0L", fuel: "Benzin", price: "590.000 TL", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcjPiXUoq2D36vcAV3tMmuY3rdn3f-qPcWow&s", km: "10.000 km", features: ["Arka görüş kamerası", "Dokunmatik radyo", "Bluetooth el frekansı"] },
+  { brand: "Volkswagen", model: "Arteon", year: "2021", engine: "2.0L", fuel: "Benzin", price: "980.000 TL", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjj8c-SVkiyMn4VyrBymKBvNmt3WQjXHeneg&s", km: "12.000 km", features: ["Deri koltuklar", "Park sensörleri", "Ambiyans aydınlatması"] },
+  { brand: "Volkswagen", model: "Caddy", year: "2022", engine: "2.0L", fuel: "Dizel", price: "860.000 TL", image: "https://www.shutterstock.com/image-vector/car-van-icon-design-vector-260nw-2282582531.jpg", km: "5.000 km", features: ["Dokunmatik bilgi-eğlence sistemi", "Şerit takip sistemi", "Hız sabitleyici"] },
+  { brand: "Volkswagen", model: "Transporter", year: "2020", engine: "2.0L", fuel: "Dizel", price: "1.100.000 TL", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ223y5xdNkf5FKfkkm-QHMRH0rn6Lz5YlXjA&s", km: "50.000 km", features: ["Isıtmalı aynalar", "Adaptif farlar", "Bölünebilir arka koltuklar"] },
+  { brand: "Volkswagen", model: "Multivan", year: "2022", engine: "1.4L Hybrid", fuel: "Hibrit", price: "1.150.000 TL", image: "https://cloud.leparking.fr/2022/04/29/08/02/volkswagen-multivan-volkswagen-multivan-2022-gris_8490617709.jpg", km: "8.000 km", features: ["Elektrikli kayar kapı", "Wi-Fi hotspot", "Adaptif süspansiyon"] },
+  { brand: "Volkswagen", model: "ID.3", year: "2022", engine: "Elektrik", fuel: "Elektrik", price: "920.000 TL", image: "https://tr.superkilometerfilter.com/wp-content/uploads/2022/08/Vw-ID.3-2021-mileage-blocker.webp", km: "3.000 km", features: ["Kablosuz şarj", "Şerit takip", "LED farlar"] },
+  { brand: "Volkswagen", model: "ID.4", year: "2022", engine: "Elektrik", fuel: "Elektrik", price: "1.000.000 TL", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRer-shwpOyFoNJRL4VUmOzM9vaBk8eQKwMAg&s", km: "1.000 km", features: ["Navigasyon sistemi", "Rejeneratif frenleme", "Isıtmalı koltuklar"] },
+  { brand: "Volkswagen", model: "Scirocco", year: "2017", engine: "2.0L", fuel: "Benzin", price: "710.000 TL", image: "https://w7.pngwing.com/pngs/245/363/png-transparent-volkswagen-scirocco-mid-size-car-full-size-car-rim-car-compact-car-car-performance-car.png", km: "45.000 km", features: ["Spor koltuklar", "Navigasyon sistemi", "Bluetooth bağlantısı"] },
+  { brand: "Volkswagen", model: "Beetle", year: "2019", engine: "1.8L", fuel: "Benzin", price: "680.000 TL", image: "https://png.pngtree.com/png-vector/20250107/ourmid/pngtree-classic-green-volkswagen-beetle-car-with-a-retro-design-png-image_15089198.png", km: "30.000 km", features: ["Retro tasarım", "Isıtmalı koltuklar", "Bluetooth ses"] },
+  { brand: "Volkswagen", model: "Sharan", year: "2020", engine: "2.0L", fuel: "Dizel", price: "930.000 TL", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0kL2d0_1WflOyA3LWuAuj64-XUDoKuX0sIg&s", km: "60.000 km", features: ["Panoramik sunroof", "Dokunmatik ekranlı bilgi-eğlence", "Adaptif hız sabitleyici"] },
+  { brand: "Volkswagen", model: "Jetta", year: "2021", engine: "1.5L", fuel: "Benzin", price: "720.000 TL", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj2OKjcLXjS7gW6CAxiXcRE8jCPX0GdeZ5_w&s", km: "20.000 km", features: ["Anahtarsız giriş", "Park yardımcısı", "Bluetooth el serbest"] },
+  { brand: "Volkswagen", model: "Amarok", year: "2023", engine: "3.0L", fuel: "Dizel", price: "1.350.000 TL", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrAPxaBxrUF-id2XDTkTBNVvWqQ-ppPqnbEg&s", km: "10.000 km", features: ["Çekme paketi", "Off-road lastikler", "Adaptif süspansiyon"] },
+  { brand: "Volkswagen", model: "Golf R", year: "2022", engine: "2.0L Turbo", fuel: "Benzin", price: "1.100.000 TL", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdd0W01uimZsx9XXzgQcTFcgs3vqEMZxAvVg&s", km: "5.000 km", features: ["Spor koltuklar", "Turboşarjlı motor", "Gelişmiş navigasyon"] },
+  { brand: "Volkswagen", model: "Passat Variant", year: "2021", engine: "2.0L", fuel: "Dizel", price: "880.000 TL", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqgNiUf6WAqG68KZSa9aCC1oJGBBfAeoOGMQ&s", km: "15.000 km", features: ["LED farlar", "Park yardımcısı", "Isıtmalı direksiyon simidi"] },
+  { brand: "Volkswagen", model: "T-Cross", year: "2022", engine: "1.0L", fuel: "Benzin", price: "690.000 TL", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUXnRtJ-HjLlni01b3O5HLfKHI-QcNwISEcQ&s", km: "18.000 km", features: ["Arka görüş kamerası", "Apple CarPlay", "Bluetooth ses"] },
+];
+
+  
+    const volkswagenContainer = document.getElementById("volkswagen-cars");
+    volkswagenCars.forEach(car => {
+      const card = document.createElement("div");
+      card.className = "bg-white rounded-xl shadow-sm overflow-hidden text-center";
+      card.innerHTML = `
+      <img src="${car.image}" alt="${car.model}" class="w-full h-48 object-cover">
+        <h3 class="text-sm font-medium py-1">${car.model}</h3>
+      
+      `;
+      card.addEventListener("click", () => openModal(car));
+      volkswagenContainer.appendChild(card);
+    });
+  </script>
+  
+    <script>
+      document.getElementById("aboutBtn").addEventListener("click", function () {
+        const aboutSection = document.getElementById("aboutSection");
+        aboutSection.classList.toggle("hidden");
+      });
+  
+    </script>
+    <script>
+      document.getElementById("close-modal").addEventListener("click", () => {
+        document.getElementById("car-modal").style.display = "none";
+      });
+    </script>
+    
+  </body>
+  
+</html>
